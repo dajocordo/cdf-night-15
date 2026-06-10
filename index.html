@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CDF Night — Celebrando 15 años">
+    <meta property="og:description" content="Acompañanos este viernes 12 de junio a celebrar los 15 años de Corazones de Fuego. ¡Entrada gratis!">
+    <meta property="og:url" content="https://cdfnight.netlify.app/">
+
+    <meta property="og:image" content="https://cdfnight.netlify.app/img/cdf-night-banner.png">
+    <meta property="og:image:alt" content="Banner oficial de CDF Night 15 años">
+
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    
+    <title>CDF Night</title>
+    <link rel="icon" href="img/cdf-logo-mini.jpeg" type="image/x-icon">
+    <style>
+        /* ==========================================
+           1. RESET, VARIABLES Y ESTILOS GLOBALES
+           ========================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            /*background-color: #192122;*/
+            background: linear-gradient(90deg, #000000 0%, #150002 40%, #a70d0d 75%, #f65306 93%, #feb903 100%);
+            color: #FFFFFF;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 0;
+        }
+
+
+        /* ==========================================
+           2. TIPOGRAFÍAS Y ENCABEZADOS
+           ========================================== */
+        h1 {
+            /* clamp(mínimo, tamaño ideal fluido, máximo) */
+            font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+            line-height: 1.1;
+            /* Interlineado cerrado para que no se desarme */
+            font-weight: 800;
+            /* Un peso alto (Extra Bold) ayuda a que luzca mejor */
+        }
+
+        h2 {
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+        }
+
+        .location-title {
+            /* clamp(mínimo, tamaño ideal fluido, máximo) */
+            font-size: clamp(2rem, 4.5vw + 1rem, 4rem) !important;
+            line-height: 1.1;
+            /* Interlineado cerrado para que no se desarme */
+            font-weight: 800;
+            /* Un peso alto (Extra Bold) ayuda a que luzca mejor */
+            color: #e2c9ad;
+        }
+
+        .p-event-info {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e2c9ad;
+        }
+
+
+        /* ==========================================
+           3. ESTRUCTURA / LAYOUT (HEADER & SECCIONES)
+           ========================================== */
+        .header-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* Permite que los elementos se vayan abajo en pantallas chicas */
+            align-items: center;
+            /* Centra verticalmente el texto con la imagen */
+            justify-content: space-between;
+            /* Deja espacio proporcional entre texto e imagen */
+            gap: 2rem;
+            /* El espacio de separación entre el texto y la imagen */
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            /* Limita el ancho en pantallas gigantes para que no se deforme */
+            margin: 0 auto;
+            /* Centra todo el bloque en la pantalla */
+        }
+
+        .header-title {
+            /* Flex-grow, Flex-shrink, Flex-basis */
+            /* Elige un tamaño ideal de 500px, pero permite crecer si hay espacio */
+            flex: 1 1 500px;
+        }
+
+        .header-title h1 {
+            font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .header-image {
+                        width: 100%;
+            max-width: 550px;
+            /* Evita que la imagen se haga gigantemente enorme */
+            height: auto;
+            /* Mantiene la proporción de la imagen sin deformarla */
+            object-fit: cover;
+            flex: 1 1 400px;
+            /* Tamaño ideal para la imagen */
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-image img {
+            width: 100%;
+            max-width: 550px;
+            /* Evita que la imagen se haga gigantemente enorme */
+            height: auto;
+            /* Mantiene la proporción de la imagen sin deformarla */
+            object-fit: cover;
+            /* ⚠️ NOTA PARA ELIMINAR: Esta regla aplica a ".header-image img", pero en tu HTML actual, el primer contenedor usa un <video> y el de ubicación maneja una imagen inline con estilos propios. Podrías removerla si no tienes etiquetas <img> hijas directas de .header-image que dependan de este CSS global. */
+        }
+
+
+        /* ==========================================
+           4. COMPONENTE: CONTADOR (COUNTDOWN)
+           ========================================== */
+        .countdown-container {
+            text-align: center;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .time-block {
+            /* background: #292220; */
+            backdrop-filter: blur(50px);
+            padding: 1.5rem;
+            border-radius: 15px 15px;
+            min-width: 100px;
+            box-shadow: rgba(253, 247, 120, 0.30) 7px 7px 29px 4px;
+            /* box-shadow: rgba(189, 183, 105, 0.1) 4px 4px 6px 2px, rgba(209, 207, 170, 0.06) 4px 4px 6px 3px; */
+            /* box-shadow: 0 4px 6px -1px rgba(189, 171, 171, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
+        }
+
+        .time-block span {
+            display: block;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #e9a558;
+            line-height: 1;
+        }
+
+        .time-block small {
+            color: #e9a558;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        #expired-message {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: #f43f5e;
+            font-weight: bold;
+        }
+
+
+        /* ==========================================
+           5. COMPONENTE: INVITADOS (SECTIONS)
+           ========================================== */
+        .sections {
+            /* background-color: #292220; */
+            backdrop-filter: blur(10px);
+        }
+
+        .speaker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .speaker-card {
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+
+        .speaker-img {
+            width: 100%;
+            height: 240px;
+            background: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .speaker-info {
+            padding: 20px;
+        }
+
+        .speaker-info h3 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .speaker-info p {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+
+        /* ==========================================
+           6. COMPONENTE: UBICACIÓN Y BOTONES GEOLOC
+           ========================================== */
+        .btn-location {
+            background-color: #e2c9ad;
+            color: #192122;
+            min-width: 200px;
+            margin-right: 1rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-location-maps {
+            background-color: #19694f;
+            color: #ffffff;
+        }
+
+        .btn-location-waze {
+            background-color: #316db3;
+            color: #ffffff;
+        }
+
+
+        /* ==========================================
+           7. COMPONENTE: BOTONES REDES SOCIALES
+           ========================================== */
+        .social {
+            display: flex;
+            justify-content: flex-start;
+            padding: 10px 0;
+            width: 90%;
+            max-width: 1100px;
+            /* margin: 0 auto; */
+        }
+
+        .btn-round {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            
+            width: 50px;           /* El ancho y el alto deben ser iguales */
+            height: 50px;          /* para que el círculo no se deforme */
+            border-radius: 50%;    /* Hace el botón completamente redondo */
+            
+            transition: transform 0.2s ease;
+            cursor: pointer;
+            opacity: 0.5;
+        }
+
+        /* Efecto sutil al pasar el cursor */
+        .btn-round:hover {
+            opacity: 100%; /* El estándar moderno de CSS usa valores de 0 a 1 (ej: 1). Aunque "100%" funciona en la mayoría de navegadores por retrocompatibilidad, la buena práctica dicta cambiarlo por "opacity: 1;". */
+            transform: scale(1.1); /* Agranda el botón un 10% */
+        }
+
+        /* Tamaño del icono dentro del círculo */
+        .btn-round img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        /* Colores de fondo específicos */
+        .btn-instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .btn-facebook {
+            background-color: #1877F2;
+        }
+
+
+        /* ==========================================
+           8. CLASES DE UTILIDAD Y MEDIA QUERIES
+           ========================================== */
+        .hidden {
+            display: none;
+        }
+
+        /* Responsivo para pantallas móviles */
+        @media (max-width: 500px) {
+            .countdown {
+                gap: 0.75rem;
+            }
+
+            .time-block {
+                padding: 1rem;
+                min-width: 75px;
+            }
+
+            .time-block span {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+        <section class="header-container">
+            <div class="header-title">
+                <h1>CDF Night</h1>
+                <p style="font-size: 1.3rem;">Celebrando 15 años de: "Corazones de Fuego"</p><br>
+                <table>
+                    <tr>
+                        <td>
+                            <p class="p-event-info">📍 Iglesia Monte Carmelo A.D</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="p-event-info">🗓️ viernes 12 de junio</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="p-event-info">🕗 7:30 P.M. - 10:30 P.M.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="p-event-info">🎫 Entrada Gratis</p>
+                        </td>
+                    </tr>
+                </table>
+                <!-- <button class="cta-button">Comenzar ahora</button> -->
+            </div>
+            <div class="header-image">
+                <!-- <img src="cdf-logo-mini.jpeg" style="opacity: 0.6; border-radius: 20px 25px;" alt="Descripción de tu producto o servicio"> -->
+                <!-- <img src="cdf15.jpg" style="opacity: 0.8; border-radius: 20px 25px;" alt="Descripción de tu producto o servicio"> -->
+                <!-- <video src="https://congresocdf.com/wp-content/uploads/2026/06/CDF_15anos.mp4" autoplay muted loop
+                    playsinline
+                    s.tyle="opacity: 0.8; border-radius: 20px 25px; width: 100%; max-width: 550px; height: auto; object-fit: cover;">
+                </video> -->
+                <!-- <video src="img/cdf-15-years-v4.mp4" autoplay muted loop
+                    playsinline
+                    style="opacity: 0.8; border-radius: 20px 25px; width: 100%; max-width: 550px; height: auto; object-fit: cover;">
+                </video> -->
+                <video 
+                    src="img/cdf-15-years-v8.mp4" 
+                    autoplay 
+                    loop 
+                    muted 
+                    playsinline
+                    webkit-playsinline
+                    style="opacity: 0.8; border-radius: 20px 25px; width: 100%; max-width: 550px; height: auto; object-fit: cover;">
+                </video>
+            </div>
+            
+        </section>
+
+    </header>
+
+    <section class="sections" style="margin-bottom: 0px;">
+        <div class="container">
+            <h2>El evento inicia en:</h2>
+            <div class="countdown-container">
+                <div class="countdown">
+                    <div class="time-block">
+                        <span id="days">00</span>
+                        <small>Días</small>
+                    </div>
+                    <div class="time-block">
+                        <span id="hours">00</span>
+                        <small>Horas</small>
+                    </div>
+                    <div class="time-block">
+                        <span id="minutes">00</span>
+                        <small>Min.</small>
+                    </div>
+                    <div class="time-block">
+                        <span id="seconds">00</span>
+                        <small>Seg.</small>
+                    </div>
+                </div>
+                <div id="expired-message" class="hidden">¡El evento ha comenzado!</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sections">
+        <div class="container">
+            <h2>Invitados</h2>
+            <div class="speaker-grid">
+                <div class="speaker-card">
+                    <div class="speaker-img">
+                        <img src="img/img-oscar-navarrete-26.png" alt="Oscar Navarrete"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="speaker-info">
+                        <h3>Oscar Navarrete</h3>
+                        <p>Predicador invitado</p>
+                    </div>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-img">
+                        <img src="img/img-belen-worship-26.png" alt="Belen Worship"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="speaker-info">
+                        <h3>Belen Worship</h3>
+                        <p>Banda musical ministrando</p>
+                    </div>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-img">
+                        <img src="img/img-pastor-daniel-26.png" alt="Daniel Panameño"
+                            style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="speaker-info">
+                        <h3>Daniel Panameño</h3>
+                        <p>Fundador de CDF y pastor de jovenes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2>Ubicación</h2>
+        <div class="social">
+            <a href="https://www.instagram.com/congresocdf" target="_blank" rel="noopener noreferrer" class="btn-round btn-instagram">
+                <img src="img/ig.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100063805380156" target="_blank" rel="noopener noreferrer" class="btn-round btn-facebook">
+                <img src="img/fb.png" alt="Facebook">
+            </a>
+        </div>
+        <section class="header-container">
+            <div class="header-title">
+                <h1 class="location-title">Como llegar</h1>
+
+                <p style="font-size: 1.3rem;">30 calle poniente #2427, Colonia Luz, San Salvador, El Salvador</p><br>
+                <div>
+                    <button class="btn-location btn-location-maps"
+                        onclick="window.open(goToChurchByGoogleMaps, '_blank')">
+                        <img src="img/google-maps-icon.png" alt="Google Maps"
+                            style="width: 20px; height: 20px; margin-right: 10px;">
+                        Ver en Google Maps
+                    </button>
+
+                    <button class="btn-location btn-location-waze" onclick="window.open(goToChurchByWaze, '_blank')">
+                        <img src="img/waze-icon.png" alt="Waze" style="width: 20px; height: 20px; margin-right: 10px;">
+                        Ver en Waze
+                    </button>
+                </div>
+
+                <!-- <button class="cta-button">Comenzar ahora</button> -->
+            </div>
+            <div class="header-image">
+                <img src="img/mapa-new-monte-carmelo.png" style="opacity: 0.8; border-radius: 20px 25px;"
+                    alt="Mapa de ubicación del evento" onclick="window.open(goToChurchByGoogleMaps, '_blank')">
+            </div>
+
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Congreso CDF (15 años). Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        // Cambia esta fecha por la de tu evento (Formato ISO: YYYY-MM-DDTHH:mm:ss)
+        const TARGET_DATE_SV = "2026-06-12T19:30:00";
+
+        function getTargetTimeInUTC(dateString) {
+            // Forzamos el offset de El Salvador (-06:00) para calcular de forma absoluta el tiempo restante
+            return new Date(`${dateString}-06:00`).getTime();
+        }
+
+        const countdownTarget = getTargetTimeInUTC(TARGET_DATE_SV);
+
+        const timerInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownTarget - now;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.querySelector('.countdown').classList.add('hidden');
+                document.getElementById('expired-message').classList.remove('hidden');
+                return;
+            }
+
+            // Cálculos de tiempo
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Renderizar en el DOM asegurando dos dígitos con padStart
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+
+        }, 1000);
+
+
+        const goToChurchByGoogleMaps = "https://www.google.com/maps/dir//MQPM%2BHHM+Iglesia+Monte+Carmelo,+Asambleas+de+Dios,+30+Calle+Poniente+2427,+San+Salvador/@13.6864736,-89.2186484,17z/data=!4m17!1m7!3m6!1s0x8f633053c8d0ec2d:0x3169863f9eb682d1!2sIglesia+Monte+Carmelo,+Asambleas+de+Dios!8m2!3d13.6864736!4d-89.2160735!16s%2Fg%2F1tjcqhry!4m8!1m0!1m5!1m1!1s0x8f633053c8d0ec2d:0x3169863f9eb682d1!2m2!1d-89.2160707!2d13.6864666!3e0?hl=es&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D";
+        const goToChurchByWaze = "https://www.waze.com/live-map/directions/sv/san-salvador-department/san-salvador/iglesia-monte-carmelo,-asambleas-de-dios?to=place.ChIJLezQyFMwY48R0YK2nj-GaTE";
+
+
+window.addEventListener('load', () => {
+    const video = document.getElementById('miVideo');
+    
+    // Aseguramos que esté silenciado (regla de oro en Android)
+    video.muted = true; 
+    
+    // Intento 1: Forzar play inmediato al cargar la página
+    video.play().catch(error => {
+      console.log("El navegador bloqueó el autoplay. Esperando interacción...");
+      
+      // Intento 2: En cuanto el usuario toque la pantalla o haga scroll, el video arranca
+      const arrancarVideo = () => {
+        video.play();
+        window.removeEventListener('click', arrancarVideo);
+        window.removeEventListener('touchstart', arrancarVideo);
+        window.removeEventListener('scroll', arrancarVideo);
+      };
+      
+      window.addEventListener('click', arrancarVideo);
+      window.addEventListener('touchstart', arrancarVideo);
+      window.addEventListener('scroll', arrancarVideo);
+    });
+  });
+
+    </script>
+</body>
+
+</html>
