@@ -2,8 +2,6 @@
 
 Landing page moderna para la celebracion de los 15 años del congreso CDF (2011 - 2026).
 
-<img width="1200" height="630" alt="cdf-night-banner" src="https://dajocordo.github.io/cdf-night-15/img/cdf-night-banner.png" />
-
 ## 🎨 Características
 
 - Diseño responsivo (mobile, tablet, desktop)
@@ -15,3 +13,4 @@ Landing page moderna para la celebracion de los 15 años del congreso CDF (2011 
 
 [Visita la landing page]([https://dajocordo.github.io/cdf-night-15/])
 
+<img width="1200" height="630" alt="cdf-night-banner" src="https://dajocordo.github.io/cdf-night-15/img/cdf-night-banner.png" />
