@@ -30,7 +30,10 @@
 
         body {
             /*background-color: #192122;*/
-            background: linear-gradient(90deg, #000000 0%, #150002 40%, #a70d0d 75%, #f65306 93%, #feb903 100%);
+            /* background: linear-gradient(90deg, #2b1e1e 0%, #12125d 40%, #af4852 75%, #e76d32 93%, #feb903 100%);
+            background: linear-gradient(90deg, #000000 0%, #150002 40%, #a70d0d 75%, #f65306 93%, #feb903 100%); */
+            /* background: linear-gradient(90deg, #2a0a55 0%, #482081 40%, #d95826 75%, #e1962c 93%, #8d8123 100%); */
+            background: linear-gradient(90deg, #2b1e1e 0%, #12125d 40%, #485eaf 75%, #427f7c 93%, #609ea9 100%);
             color: #FFFFFF;
         }
 
@@ -367,6 +370,12 @@
                         </td>
                     </tr>
                 </table>
+                <div style="padding: 20px;">
+                    <button class="btn-location btn-location-waze" onclick="window.open(goToStreaming, '_blank')">
+                        <img src="img/live.png" alt="Waze" style="width: 24px; height: 24px; margin-right: 5px;">
+                        <span style="font-size: 1.2rem;">Transmisión en vivo</span>
+                    </button>
+                </div>
                 <!-- <button class="cta-button">Comenzar ahora</button> -->
             </div>
             <div class="header-image">
@@ -545,6 +554,7 @@
 
         const goToChurchByGoogleMaps = "https://www.google.com/maps/dir//MQPM%2BHHM+Iglesia+Monte+Carmelo,+Asambleas+de+Dios,+30+Calle+Poniente+2427,+San+Salvador/@13.6864736,-89.2186484,17z/data=!4m17!1m7!3m6!1s0x8f633053c8d0ec2d:0x3169863f9eb682d1!2sIglesia+Monte+Carmelo,+Asambleas+de+Dios!8m2!3d13.6864736!4d-89.2160735!16s%2Fg%2F1tjcqhry!4m8!1m0!1m5!1m1!1s0x8f633053c8d0ec2d:0x3169863f9eb682d1!2m2!1d-89.2160707!2d13.6864666!3e0?hl=es&entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D";
         const goToChurchByWaze = "https://www.waze.com/live-map/directions/sv/san-salvador-department/san-salvador/iglesia-monte-carmelo,-asambleas-de-dios?to=place.ChIJLezQyFMwY48R0YK2nj-GaTE";
+        const goToStreaming = "https://stream.iglesiamontecarmelo.com/watch";
 
 
 window.addEventListener('load', () => {
